@@ -1,11 +1,12 @@
 ﻿using System;
+using FantasyBaseball.DataHandling;
 using FantasyBaseball.Models;
 
 namespace FantasyBaseball.Services
 {
     public class DataHandler
     {
-        private PlayerDomainModel Player;
+        private Player Player;
 
         public DataHandler()
         {
@@ -20,9 +21,9 @@ namespace FantasyBaseball.Services
         public string TestGetData()
         {
             // TODO go get real data
-            Player = new PlayerDomainModel(1, "Isaac", "Catcher");
+            Player = new Player(1, "Isaac", "Catcher");
 
-            if (Player != null)
+            if (BaseballStatsDataHandler.IsValid() != null)
             {
                 return Player.ToString();
 

@@ -12,5 +12,6 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Services\" />
+    <Folder Include="DataHandling\" />
   </ItemGroup>
 </Project>

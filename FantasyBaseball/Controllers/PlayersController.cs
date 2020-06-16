@@ -25,4 +25,5 @@ namespace FantasyBaseball.Controllers
             yield return _data.TestGetData();
         }
 
+    }
 }
