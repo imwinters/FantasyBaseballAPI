@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace FantasyBaseball.Models
 {
     public class Player
@@ -6,7 +7,8 @@ namespace FantasyBaseball.Models
         private int _Id;
         private string _Name;
         private string _Position;
-            
+        private List<BattingRow> BattingHistory;
+
         public Player(int Id, string Name, string Position)
         {
             _Id = Id;
