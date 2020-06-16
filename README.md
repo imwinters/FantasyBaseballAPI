@@ -1,6 +1,9 @@
 # FantasyBaseballAPI 
 This project is intended to read baseball statistics from CSV files and make recomendations for fantasy baseball draft choices. The project will be written in C# with a React Client. This is intended only for entertainment and demonstration purposes, help your self to any of the code here but it is intended as a fun project, not a production one.
 
+This project is only possible becuase of Sean Lahman's data set. With tremendous gratitude it can be found here:
+http://www.seanlahman.com/baseball-archive/statistics/
+
 ## Phases
 ### Phase 1
 This phase consists of colleceting, navigating and analyzing the data. 
