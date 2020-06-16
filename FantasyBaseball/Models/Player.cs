@@ -10,7 +10,7 @@ namespace FantasyBaseball.Models
         public Player(int Id, string Name, string Position)
         {
             _Id = Id;
-            _Name =ÏName;
+            _Name =Name;
             _Position = Position;
 
         }
