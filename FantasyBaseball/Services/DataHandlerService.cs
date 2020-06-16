@@ -23,7 +23,7 @@ namespace FantasyBaseball.Services
             // TODO go get real data
             Player = new Player(1, "Isaac", "Catcher");
 
-            if (BaseballStatsDataHandler.IsValid() != null)
+            if (Player != null)
             {
                 return Player.ToString();
 

@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 namespace FantasyBaseball.Models
 {
     public class Player
@@ -10,7 +10,7 @@ namespace FantasyBaseball.Models
         public Player(int Id, string Name, string Position)
         {
             _Id = Id;
-            _Name = Name;
+            _Name =ÏName;
             _Position = Position;
 
         }
