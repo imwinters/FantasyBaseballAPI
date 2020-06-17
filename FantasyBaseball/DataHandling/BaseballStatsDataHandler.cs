@@ -33,7 +33,7 @@ namespace FantasyBaseball.DataHandling
 
                 while (!csvParser.EndOfData)
                 {
-                    BattingRow currentLine = new BattingRow();
+
                     // Read current line fields, pointer moves to the next line.
                     string[] fields = csvParser.ReadFields();
 
