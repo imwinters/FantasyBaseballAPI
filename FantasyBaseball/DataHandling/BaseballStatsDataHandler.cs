@@ -1,6 +1,8 @@
 ﻿
 using System.Collections.Generic;
 using Microsoft.VisualBasic.FileIO;
+using FantasyBaseball.Models;
+using System;
 
 namespace FantasyBaseball.DataHandling
 {
@@ -14,9 +16,9 @@ namespace FantasyBaseball.DataHandling
         }
 
         // TODO implement this functionallity with the data models/types from all the CSV Files
-        public static List<List<string>> GatherData(string path)
+        public static List<BattingRow> GatherData(string path)
         {
-            List<List<string>> results = new List<List<string>>();
+            List<BattingRow> results = new List<BattingRow>();
 
             using (TextFieldParser csvParser = new TextFieldParser(path))
             {
@@ -29,15 +31,17 @@ namespace FantasyBaseball.DataHandling
 
                 while (!csvParser.EndOfData)
                 {
-                    List<string> currentLine = new List<string>();
+                    BattingRow currentLine = new BattingRow();
                     // Read current line fields, pointer moves to the next line.
                     string[] fields = csvParser.ReadFields();
-                    currentLine.Add(fields[0]);
-                    currentLine.Add(fields[1]);
 
-                    if(currentLine.Count > 0)
+                    BattingRow row = new BattingRow();
+                    
+                    MapBattingRow(fields, row);
+
+                    if(row.PlayerId != null)
                     {
-                        results.Add(currentLine);
+                        results.Add(row);
                     }
                 }
 
@@ -51,6 +55,47 @@ namespace FantasyBaseball.DataHandling
             return null;
         }
 
+        private static int ParseToInt(string field)
+        {
+            int currentValue;
+            bool success = Int32.TryParse(field, out currentValue);
+            if (success)
+            {
+                return currentValue;
+            }
+
+            return -1;
+        }
+
+        private static BattingRow MapBattingRow(string[] fields, BattingRow currentLine) {
+
+            int startingIndex = 0;
+
+            currentLine.PlayerId = fields[startingIndex++];
+            currentLine.YearId = ParseToInt(fields[startingIndex++]);
+            currentLine.Stint = ParseToInt(fields[startingIndex++]);
+            currentLine.TeamId = fields[startingIndex++];
+            currentLine.LeagueId = fields[startingIndex++];
+            currentLine.GamesPlayed = ParseToInt(fields[startingIndex++]);
+            currentLine.AtBats = ParseToInt(fields[startingIndex++]);
+            currentLine.Runs = ParseToInt(fields[startingIndex++]);
+            currentLine.Hits = ParseToInt(fields[startingIndex++]);
+            currentLine.Doubles = ParseToInt(fields[startingIndex++]);
+            currentLine.Triples = ParseToInt(fields[startingIndex++]);
+            currentLine.Homeruns = ParseToInt(fields[startingIndex++]);
+            currentLine.RBIs = ParseToInt(fields[startingIndex++]);
+            currentLine.StolenBases = ParseToInt(fields[startingIndex++]);
+            currentLine.CaughtStealing = ParseToInt(fields[startingIndex++]);
+            currentLine.Walks = ParseToInt(fields[startingIndex++]);
+            currentLine.StrikeOuts = ParseToInt(fields[startingIndex++]);
+            currentLine.IntentionalWalks = ParseToInt(fields[startingIndex++]);
+            currentLine.HitByPitch = ParseToInt(fields[startingIndex++]);
+            currentLine.SacrficeHit = ParseToInt(fields[startingIndex++]);
+            currentLine.SacrificeFly = ParseToInt(fields[startingIndex++]);
+            currentLine.GroundIntoDoublePlay = ParseToInt(fields[startingIndex++]);
+
+            return currentLine;
+        }
 
     }
 }
