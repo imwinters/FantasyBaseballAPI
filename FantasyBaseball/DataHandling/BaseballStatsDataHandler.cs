@@ -16,11 +16,13 @@ namespace FantasyBaseball.DataHandling
         }
 
         // TODO implement this functionallity with the data models/types from all the CSV Files
-        public static List<BattingRow> GatherData(string path)
+        public static List<BattingRow> GatherBattingData(string path)
         {
+            string battingCSVPath = path + "/Batting.csv";
+
             List<BattingRow> results = new List<BattingRow>();
 
-            using (TextFieldParser csvParser = new TextFieldParser(path))
+            using (TextFieldParser csvParser = new TextFieldParser(battingCSVPath))
             {
                 csvParser.CommentTokens = new string[] { "#" };
                 csvParser.SetDelimiters(new string[] { "," });
@@ -49,6 +51,7 @@ namespace FantasyBaseball.DataHandling
 
             if (results.Count > 0)
             {
+                Console.WriteLine(results[0].PlayerId);
                 return results;
             }
 

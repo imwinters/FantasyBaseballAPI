@@ -12,10 +12,11 @@ namespace FantasyBaseball.Services
         {
         }
 
-        public void InitializeData()
+        public void InitializeData(string path)
         {
             // Build and store the results of the data query
-            Console.WriteLine("Ran on startup!");
+            Console.WriteLine("Gathering Data...");
+            BaseballStatsDataHandler.GatherBattingData(path);
         }
 
         public string TestGetData()
