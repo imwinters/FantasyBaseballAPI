@@ -15,5 +15,9 @@
     <Folder Include="Services\" />
     <Folder Include="DataHandling\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.Caching" Version="4.7.0" />
   </ItemGroup>
 </Project>

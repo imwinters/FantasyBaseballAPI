@@ -7,6 +7,7 @@ namespace FantasyBaseball.Extensions
     {
             public static double Mean(this List<double> values)
             {
+
                 return values.Count == 0 ? 0 : values.Mean(0, values.Count);
             }
 

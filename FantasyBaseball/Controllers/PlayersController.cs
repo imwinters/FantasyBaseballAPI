@@ -11,9 +11,9 @@ namespace FantasyBaseball.Controllers
     [Route("api/[controller]")]
     public class PlayersController : Controller
     {
-        readonly DataHandler _data;
+        readonly IDataHandler _data;
 
-        public PlayersController(DataHandler data)
+        public PlayersController(IDataHandler data)
         {
             _data = data;
         }

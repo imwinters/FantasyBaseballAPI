@@ -7,15 +7,8 @@ using System;
 namespace FantasyBaseball.DataHandling
 {
     public static class BaseballStatsDataHandler
-    {
-        // TODO write data science methods and handlers here
+    { 
 
-        public static bool IsValid()
-        {
-            return true;
-        }
-
-        // TODO implement this functionallity with the data models/types from all the CSV Files
         public static List<BattingRow> GatherBattingData(string path)
         {
             string battingCSVPath = path + "/Batting.csv";
@@ -56,6 +49,22 @@ namespace FantasyBaseball.DataHandling
             }
 
             return null;
+        }
+
+        internal static List<Player> GatherPlayersData(string path)
+        {
+            List<Player> results = new List<Player>();
+
+            // Dummy Data to test
+
+            Player Isaac = new Player(1, "Isaac", "C");
+
+
+            results.Add(Isaac);
+
+            // TODO Populate player data
+
+            return results;
         }
 
         private static int ParseToInt(string field)
