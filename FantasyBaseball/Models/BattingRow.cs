@@ -24,5 +24,7 @@ namespace FantasyBaseball.Models
         public int SacrficeHit { get; set; }
         public int SacrificeFly { get; set; }
         public int GroundIntoDoublePlay { get; set; }
+        public int SeasonPointsTotal { get; set; }
+        public float GameAvg { get; set; }
     }
 }

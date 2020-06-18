@@ -62,6 +62,7 @@ namespace FantasyBaseball.Models
         public int SacrificeFliesByopponent { get; set; }
 
         public int GroundIntoDoublePlayByOpponent { get; set; }
-
+        public double GameAvg { get; internal set; }
+        public double SeasonPointsTotal { get; internal set; }
     }
 }
