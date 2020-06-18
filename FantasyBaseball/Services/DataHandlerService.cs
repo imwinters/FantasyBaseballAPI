@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FantasyBaseball.DataHandling;
 using FantasyBaseball.Models;
 using Microsoft.Extensions.Caching.Memory;
+using System.Text.Json;
 
 namespace FantasyBaseball.Services
 {
@@ -43,13 +44,16 @@ namespace FantasyBaseball.Services
 
         public string TestGetData()
         {
-            // TODO go get real data
-            List<Player> result;
-            bool success = _cache.TryGetValue(CacheKeys.Players, out result);
+            Results results = new Results();
+            List<Player> catchers;
+            _cache.TryGetValue(CacheKeys.Players, out catchers);
+            results.Catcher = catchers;
+            results.LastSeasonWithStatsAvailible = 2019;
 
-            if (result.Count > 0 && success)
+            if (results.LastSeasonWithStatsAvailible != -1)
             {
-                return result[0].ToString();
+               
+                return JsonSerializer.Serialize(results);
 
             }
             return new string("No Data");

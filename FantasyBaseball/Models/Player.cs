@@ -5,33 +5,32 @@ namespace FantasyBaseball.Models
 {
     public class Player
     {
-        private int _Id;
-        private string _Name;
-        private string _Position;
-        private List<BattingRow> BattingHistory;
-        private List<PitchingRow> PitchingHistory;
-        private double AvgScoreBySeason;
-        private double ScoreVarianceBySeason;
-        private double ScoreStandardDeviationBySeason;
+        public int Id;
+        public string Name;
+        public string Position;
+        public List<BattingRow> BattingHistory;
+        public List<PitchingRow> PitchingHistory;
+        public double AvgScoreBySeason;
+        public double ScoreStandardDeviationBySeason;
 
-        public Player(int Id, string Name, string Position)
+        public Player(int _Id, string _Name, string _Position)
         {
-            _Id = Id;
-            _Name =Name;
-            _Position = Position;
+            this.Id = _Id;
+            Name = _Name;
+            Position = _Position;
 
         }
 
         public string GetPlayerInfo()
         {
-            return string.Concat(_Id.ToString(), _Name, _Position);
+            return string.Concat(Id.ToString(), Name, Position);
         }
 
         public override string ToString()
         {
-            return $"Id: {_Id}," +
-                $" Name: {_Name}, " +
-                $"Position: {_Position}";
+            return $"Id: {Id}," +
+                $" Name: {Name}, " +
+                $"Position: {Position}";
         }
 
         public void SetBattingHistory(List<BattingRow> rows)
@@ -101,8 +100,7 @@ namespace FantasyBaseball.Models
                 }
 
                 AvgScoreBySeason = scores.Mean();
-                ScoreVarianceBySeason = scores.Variance();
-                ScoreVarianceBySeason = scores.StandardDeviation();
+                ScoreStandardDeviationBySeason = scores.StandardDeviation();
 
             }
             catch
