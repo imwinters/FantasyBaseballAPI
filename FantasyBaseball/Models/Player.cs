@@ -96,7 +96,12 @@ namespace FantasyBaseball.Models
             try
             {
                 List<double> scores = new List<double>();
-
+                if (BattingHistory == null)
+                {
+                    AvgScoreBySeason = 0;
+                    ScoreStandardDeviationBySeason = 0;
+                    return true;
+                }
                 foreach (BattingRow row in BattingHistory)
                 {
                     scores.Add(row.SeasonPointsTotal);
@@ -108,8 +113,7 @@ namespace FantasyBaseball.Models
             }
             catch (Exception ex)
             {
-                AvgScoreBySeason = 0;
-                ScoreStandardDeviationBySeason = 0;
+                Console.WriteLine(ex.Message, ex.StackTrace, ex.Source);
                 return false;
             }
 
@@ -122,6 +126,14 @@ namespace FantasyBaseball.Models
             {
                 List<double> scores = new List<double>();
 
+                if(PitchingHistory == null)
+                {
+                    AvgPitchingScoreBySeason = 0;
+                    PitchingStdDev = 0;
+
+                    return true;
+                }
+
                 foreach (PitchingRow row in PitchingHistory)
                 {
                     scores.Add(row.SeasonPointsTotal);
@@ -131,8 +143,9 @@ namespace FantasyBaseball.Models
                 PitchingStdDev = scores.StandardDeviation();
 
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message, ex.StackTrace, ex.Source);
                 return false;
             }
 

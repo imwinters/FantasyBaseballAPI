@@ -33,7 +33,7 @@ namespace FantasyBaseball.Controllers
                 return "Rebuild Data Pool";
             }
             var first50 = sortedResults.Skip(Math.Max(0, sortedResults.Count() - 50));
-            string JSONString = JsonConvert.SerializeObject(first50);
+            string JSONString = JsonConvert.SerializeObject(first50.Reverse());
             return JSONString;
         }
 

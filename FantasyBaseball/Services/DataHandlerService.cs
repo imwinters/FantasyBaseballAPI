@@ -89,7 +89,7 @@ namespace FantasyBaseball.Services
             foreach (Player player in tempList)
             {
                 player.CalculateScore();
-
+                player.CalculatePitchingScore();
             }
 
                 // Look for cache key.
