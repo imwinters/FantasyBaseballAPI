@@ -26,5 +26,28 @@ namespace FantasyBaseball.Models
         public int GroundIntoDoublePlay { get; set; }
         public int SeasonPointsTotal { get; set; }
         public float GameAvg { get; set; }
+
+        public void CalculateBattingInfo()
+        {
+
+            int total = 0;
+
+            total += (Hits - Doubles - Triples - Homeruns);
+            total += (Doubles * 2);
+            total += (Triples * 3);
+            total += (Homeruns * 4);
+            total += Runs;
+            total += RBIs;
+            total += (StolenBases * 2);
+            total -= CaughtStealing;
+            total += Walks;
+            total -= StrikeOuts;
+
+            GameAvg = (total / GamesPlayed);
+            SeasonPointsTotal = total;
+
+            SeasonPointsTotal = total;
+
+        }
     }
 }

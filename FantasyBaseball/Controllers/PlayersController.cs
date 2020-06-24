@@ -1,5 +1,7 @@
 ﻿
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using FantasyBaseball.Models;
 using FantasyBaseball.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -25,11 +27,12 @@ namespace FantasyBaseball.Controllers
         public string Get()
         {
             List<Player> results = _data.TestGetData();
+            List<Player> sortedResults = results.OrderBy(o => o.AvgScoreBySeason).ToList();
             if (results == null)
             {
                 return "Rebuild Data Pool";
             }
-            List<Player> first50 = results.GetRange(0, 50);
+            var first50 = sortedResults.Skip(Math.Max(0, sortedResults.Count() - 50));
             string JSONString = JsonConvert.SerializeObject(first50);
             return JSONString;
         }

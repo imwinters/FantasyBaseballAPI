@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FantasyBaseball.Extensions;
 
 namespace FantasyBaseball.Models
@@ -12,6 +13,8 @@ namespace FantasyBaseball.Models
         public List<PitchingRow> PitchingHistory;
         public double AvgScoreBySeason;
         public double ScoreStandardDeviationBySeason;
+        public double AvgPitchingScoreBySeason;
+        public double PitchingStdDev;
 
         public Player(string _Id, string _Name, string _Position)
         {
@@ -101,6 +104,31 @@ namespace FantasyBaseball.Models
 
                 AvgScoreBySeason = scores.Mean();
                 ScoreStandardDeviationBySeason = scores.StandardDeviation();
+
+            }
+            catch (Exception ex)
+            {
+                AvgScoreBySeason = 0;
+                ScoreStandardDeviationBySeason = 0;
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool CalculatePitchingScore()
+        {
+            try
+            {
+                List<double> scores = new List<double>();
+
+                foreach (PitchingRow row in PitchingHistory)
+                {
+                    scores.Add(row.SeasonPointsTotal);
+                }
+
+                AvgPitchingScoreBySeason = scores.Mean();
+                PitchingStdDev = scores.StandardDeviation();
 
             }
             catch

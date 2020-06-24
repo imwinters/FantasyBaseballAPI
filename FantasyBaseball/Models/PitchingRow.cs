@@ -66,5 +66,24 @@ namespace FantasyBaseball.Models
         public double GameAvg { get; internal set; }
 
         public double SeasonPointsTotal { get; internal set; }
+
+        public void CalculatePitchingInfo()
+        {
+            double total = 0;
+
+            total += OutsPitched * 0.75;
+            total -= (EarnedRuns * 2);
+            total += StrikeOuts;
+            total -= Walks;
+            total += Wins * 3;
+            total += Saves * 2;
+            total += (Losses * 5);
+
+            GameAvg = (total / Games);
+            SeasonPointsTotal = total;
+
+            SeasonPointsTotal = total;
+              
+        }
     }
 }

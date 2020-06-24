@@ -52,16 +52,15 @@ namespace FantasyBaseball.Services
             Console.WriteLine("Calculating Batting Data...");
             foreach (BattingRow row in battingData)
             {
-                IEnumerable<Player> playerList = tempList.Where(i => i.Id == row.PlayerId);
-                foreach(Player player in playerList)
+                row.CalculateBattingInfo();
+
+                foreach(Player player in tempList.Where(i => i.Id == row.PlayerId))
                 {
                     if (player.BattingHistory == null)
                     {
                         player.BattingHistory = new List<BattingRow>();
                     }
                     player.BattingHistory.Add(row);
-
-                    finalPlayers.Add(player);
                 }
             }
 
@@ -72,22 +71,28 @@ namespace FantasyBaseball.Services
 
             foreach (PitchingRow row in pitchingData)
             {
-                IEnumerable<Player> playerList = tempList.Where(i => i.Id == row.PlayerId);
-                foreach (Player player in playerList)
+                row.CalculatePitchingInfo();
+
+                foreach (Player player in tempList.Where(i => i.Id == row.PlayerId))
                 {
                     if (player.PitchingHistory == null)
                     {
                         player.PitchingHistory = new List<PitchingRow>();
                     }
                     player.PitchingHistory.Add(row);
-                    finalPlayers.Add(player);
                 }
 
             }
 
             Console.WriteLine("Pitching Data Finished");
 
-            // Look for cache key.
+            foreach (Player player in tempList)
+            {
+                player.CalculateScore();
+
+            }
+
+                // Look for cache key.
             if (!_cache.TryGetValue(CacheKeys.Players, out cacheEntry))
             {
 
@@ -96,13 +101,17 @@ namespace FantasyBaseball.Services
 
                 // Save data in cache.
                 // TODO replate templist once position data is added
-                _cache.Set(CacheKeys.Players, finalPlayers, cacheEntryOptions);
+                _cache.Set(CacheKeys.Players, tempList, cacheEntryOptions);
             }
 
             // Build and store the results of the data query
             Console.WriteLine("Data Processed!");
 
+            
+
         }
+
+        
 
         public List<Player> TestGetData()
         {
