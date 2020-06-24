@@ -9,21 +9,21 @@ namespace FantasyBaseball.Models
 
         public int LastSeasonWithStatsAvailible { get; set; }
 
-        public List<Player> Pitchers;
+        public IEnumerable<Player> Pitchers;
 
-        public List<Player> Outfielders { get; set; }
+        public IEnumerable<Player> Outfielders { get; set; }
 
-        public List<Player> FirstBase { get; set; }
+        public IEnumerable<Player> FirstBase { get; set; }
 
-        public List<Player> SecondBase { get; set; }
+        public IEnumerable<Player> SecondBase { get; set; }
 
-        public List<Player> ShortStop { get; set; }
+        public IEnumerable<Player> ShortStop { get; set; }
 
-        public List<Player> ThirdBase { get; set; }
+        public IEnumerable<Player> ThirdBase { get; set; }
 
-        public List<Player> Catcher { get; set; }
+        public IEnumerable<Player> Catcher { get; set; }
 
-        public List<Player> DesignatedHitter { get; set; }
+        public IEnumerable<Player> DesignatedHitter { get; set; }
 
         public Results()
         {

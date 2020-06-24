@@ -5,12 +5,12 @@ using FantasyBaseball.Models;
 using Microsoft.Extensions.Caching.Memory;
 using System.Text.Json;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FantasyBaseball.Services
 {
     public class DataHandler : IDataHandler
     {
-        private Player Player;
         private IMemoryCache _cache;
 
         public DataHandler(IMemoryCache memoryCache)
@@ -50,11 +50,12 @@ namespace FantasyBaseball.Services
             Console.WriteLine($"Total Players {personCount}");
 
             Console.WriteLine("Calculating Batting Data...");
-            foreach (BattingRow row in battingData)
+
+            Parallel.ForEach(battingData, row =>
             {
                 row.CalculateBattingInfo();
 
-                foreach(Player player in tempList.Where(i => i.Id == row.PlayerId))
+                foreach (Player player in tempList.Where(i => i.Id == row.PlayerId))
                 {
                     if (player.BattingHistory == null)
                     {
@@ -62,14 +63,15 @@ namespace FantasyBaseball.Services
                     }
                     player.BattingHistory.Add(row);
                 }
-            }
+            });
+
 
             Console.WriteLine("Batting Data Finished");
 
 
             Console.WriteLine("Calculating Pitching Data...");
 
-            foreach (PitchingRow row in pitchingData)
+            Parallel.ForEach(pitchingData, row =>
             {
                 row.CalculatePitchingInfo();
 
@@ -81,16 +83,19 @@ namespace FantasyBaseball.Services
                     }
                     player.PitchingHistory.Add(row);
                 }
+            });
 
-            }
 
             Console.WriteLine("Pitching Data Finished");
 
-            foreach (Player player in tempList)
+            Parallel.ForEach(tempList, player =>
             {
                 player.CalculateScore();
                 player.CalculatePitchingScore();
-            }
+            });
+
+
+            cacheEntry.Pitchers = tempList.Where(i => i.PitchingHistory.Count != 0 || i.PitchingHistory != null);
 
                 // Look for cache key.
             if (!_cache.TryGetValue(CacheKeys.Players, out cacheEntry))
@@ -113,24 +118,18 @@ namespace FantasyBaseball.Services
 
         
 
-        public List<Player> TestGetData()
+        public Results TestGetData()
         {
-            Results results = new Results();
-            List<Player> catchers;
+            IEnumerable<Player> results;
 
-            _cache.TryGetValue(CacheKeys.Players, out catchers);
+            _cache.TryGetValue(CacheKeys.Players, out results);
 
-            results.Catcher = catchers;
+            Results final = new Results();
 
-            results.LastSeasonWithStatsAvailible = 2019;
+            final.Pitchers = results.Where(i => i.PitchingHistory != null);
 
-            if (results.LastSeasonWithStatsAvailible != -1)
-            {
-               
-                return results.Catcher;
+            return final;
 
-            }
-            return null;
         }
     }
 }

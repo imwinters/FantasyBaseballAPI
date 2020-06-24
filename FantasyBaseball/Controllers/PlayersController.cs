@@ -26,15 +26,14 @@ namespace FantasyBaseball.Controllers
         [HttpGet]
         public string Get()
         {
-            List<Player> results = _data.TestGetData();
-            List<Player> sortedResults = results.OrderBy(o => o.AvgScoreBySeason).ToList();
+            Results results =
+                _data.TestGetData();
             if (results == null)
             {
                 return "Rebuild Data Pool";
             }
-            var first50 = sortedResults.Skip(Math.Max(0, sortedResults.Count() - 50));
-            string JSONString = JsonConvert.SerializeObject(first50.Reverse());
-            return JSONString;
+            string JSONString = JsonConvert.SerializeObject(results);
+            return new string(JSONString);
         }
 
     }

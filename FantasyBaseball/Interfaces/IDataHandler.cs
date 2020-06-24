@@ -5,7 +5,7 @@ namespace FantasyBaseball.Services
 {
     public interface IDataHandler
     {
-        List<Player> TestGetData();
+        Results TestGetData();
         void InitializeData(string path);
     }
 }
