@@ -5,7 +5,7 @@ namespace FantasyBaseball.Models
 {
     public class Player
     {
-        public int Id;
+        public string Id;
         public string Name;
         public string Position;
         public List<BattingRow> BattingHistory;
@@ -13,9 +13,9 @@ namespace FantasyBaseball.Models
         public double AvgScoreBySeason;
         public double ScoreStandardDeviationBySeason;
 
-        public Player(int _Id, string _Name, string _Position)
+        public Player(string _Id, string _Name, string _Position)
         {
-            this.Id = _Id;
+            Id = _Id;
             Name = _Name;
             Position = _Position;
 

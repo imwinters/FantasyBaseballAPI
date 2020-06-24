@@ -1,8 +1,11 @@
-﻿namespace FantasyBaseball.Services
+﻿using System.Collections.Generic;
+using FantasyBaseball.Models;
+
+namespace FantasyBaseball.Services
 {
     public interface IDataHandler
     {
-        string TestGetData();
+        List<Player> TestGetData();
         void InitializeData(string path);
     }
 }
